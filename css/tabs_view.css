@@ -2,19 +2,35 @@
     margin-top: 10%;
 }
 body {
-    background: #2c3e50;
+    background: #22313F;
+    color: #ecf0f1;
 }
 ul {
     list-style: none;
 }
+button {
+    color: inherit;
+}
+button:focus,
+button:hover {
+    color: #1abc9c;
+    border-color: #1abc9c;
+}
+.rounded {
+    -webkit-border-radius: 0.5rem;
+    -moz-border-radius: 0.5rem;
+    border-radius: 0.5rem;
+}
 .tab {
     float: left;
     margin: 0;
-    padding: 0 20px;
+    padding: 0 2.5rem;
     position: relative;
-    border: 1px solid #95a5a6;
-    border-radius: 6px 6px 0 0;
-    border-bottom: none;
+    border-bottom: 0.2em solid transparent;
+}
+.tab.active {
+    border-bottom: 0.2em solid #27ae60;
+    background: #34495e;
 }
 .tab > * {
     margin-bottom: 0;
@@ -24,39 +40,40 @@ ul {
 .tab > .tab-name {
     line-height: inherit;
 }
-.tab > button.close {
-    width: 10px;
-    height: 10px;
+.tab > button.close-tab {
+    width: 1rem;
+    height: 1rem;
     vertical-align: middle;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
+    -webkit-border-radius: 0.5rem;
+    -moz-border-radius: 0.5rem;
+    border-radius: 0.5rem;
     padding: 0;
     position: absolute;
-    right: 5px;
+    right: 0.5rem;
     top: 50%;
-    margin-top: -5px;
+    margin-top: -0.5rem;
 }
-.tab > button.close:hover {
+.tab > button.close-tab:hover {
     border-color: #c0392b;
     background: #e74c3c;
 }
 #tabs_holder {
     overflow: hidden;
     overflow-x: auto;
-    margin: 0;
     position: relative;
-    line-height: 3.5rem;
+    line-height: 5rem;
+    background: #2c3e50;
 }
 #tabs_holder > .tab {
 
 }
-#tabs_holder > .tab.active {
-
-}
-#tabs_holder > .tab > button.close {
+#tabs_holder > .tab > button.close-tab {
     visibility: hidden;
 }
-#tabs_holder > .tab:hover > button.close {
+#tabs_holder > .tab:hover > button.close-tab {
     visibility: visible;
+}
+#tab_content {
+    background: #2c3e50;
+    padding: 1rem;
 }

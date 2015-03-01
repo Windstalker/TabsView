@@ -38,43 +38,41 @@
 <!-- Primary Page Layout
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 <div class="container" id="tabs_view">
-	<ul id="tabs_holder" class="row">
-		<li class="tab active" id="tab_1">
+	<ul id="tabs_holder" class="row rounded">
+		<li class="tab active" id="tab_1" data-tab-id="c0">
 			<span class="tab-name">Tab #1</span>
-			<button class="close close-tab"></button>
+			<button class="close-tab"></button>
 		</li>
-		<li class="tab" id="tab_2">
+		<li class="tab" id="tab_2" data-tab-id="c1">
 			<span class="tab-name">Tab #2</span>
-			<button class="close close-tab"></button>
+			<button class="close-tab"></button>
 		</li>
-		<li class="tab" id="tab_3">
+		<li class="tab" id="tab_3" data-tab-id="c2">
 			<span class="tab-name">Tab #3</span>
-			<button class="close close-tab"></button>
+			<button class="close-tab"></button>
+		</li>
+		<li class="tab ico-plus add-new-tab">
+			<span class="tab-name">Add new tab</span>
 		</li>
 	</ul>
-	<div id="tab_content" class="row">
-		<ul class="task-list">
-			<li class="task" id="task_1">
-				<span class="task-name">Task #1</span>
-				<input class="primary done" type="checkbox"/>
-				<button class="close delete-task"></button>
-			</li>
-			<li class="task" id="task_2">
-				<span class="task-name">Task #2</span>
-				<input class="primary done" type="checkbox"/>
-				<button class="close delete-task"></button>
-			</li>
-			<li class="task" id="task_3">
-				<span class="task-name">Task #3</span>
-				<input class="primary done" type="checkbox"/>
-				<button class="close delete-task"></button>
-			</li>
-			<li class="task" id="task_4">
-				<span class="task-name">Task #4</span>
-				<input class="primary done" type="checkbox"/>
-				<button class="close delete-task"></button>
-			</li>
-		</ul>
+	<div id="tab_content" class="row rounded">
+		<div class="content-block" data-block-id="c0">
+			<div class="edit-panel row">
+				<button class="ico-edit edit-block">Edit</button>
+				<button class="ico-close delete-block">Delete</button>
+			</div>
+			<div class="content-wrapper row">
+				<img src="http://lorempixel.com/240/160/nature" alt="Picture"/>
+				<p>
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+					Accusantium animi asperiores aut doloribus facilis, id iusto, magnam modi nisi nobis,
+					non ullam ut. Cupiditate nihil perspiciatis repellat! Aliquam assumenda, recusandae.
+				</p>
+			</div>
+		</div>
+		<div class="content-block row">
+			<button class="u-full-width ico-plus add-block">Add new content block</button>
+		</div>
 	</div>
 </div>
 
