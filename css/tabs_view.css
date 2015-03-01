@@ -1,6 +1,3 @@
-.container {
-    margin-top: 10%;
-}
 body {
     background: #22313F;
     color: #ecf0f1;
@@ -8,13 +5,17 @@ body {
 ul {
     list-style: none;
 }
-button {
+button,
+button:focus {
     color: inherit;
+    border-color: inherit;
 }
-button:focus,
 button:hover {
     color: #1abc9c;
     border-color: #1abc9c;
+}
+.container {
+    margin-top: 4rem;
 }
 .rounded {
     -webkit-border-radius: 0.5rem;
@@ -26,6 +27,7 @@ button:hover {
     margin: 0;
     padding: 0 2.5rem;
     position: relative;
+    line-height: 5rem;
     border-bottom: 0.2em solid transparent;
 }
 .tab.active {
@@ -47,11 +49,18 @@ button:hover {
     -webkit-border-radius: 0.5rem;
     -moz-border-radius: 0.5rem;
     border-radius: 0.5rem;
+    border: 1px solid #bbb;
     padding: 0;
     position: absolute;
     right: 0.5rem;
     top: 50%;
     margin-top: -0.5rem;
+}
+.tab > button.close-tab {
+    visibility: hidden;
+}
+.tab:hover > button.close-tab {
+    visibility: visible;
 }
 .tab > button.close-tab:hover {
     border-color: #c0392b;
@@ -61,19 +70,32 @@ button:hover {
     overflow: hidden;
     overflow-x: auto;
     position: relative;
-    line-height: 5rem;
     background: #2c3e50;
 }
 #tabs_holder > .tab {
 
 }
-#tabs_holder > .tab > button.close-tab {
-    visibility: hidden;
-}
-#tabs_holder > .tab:hover > button.close-tab {
-    visibility: visible;
-}
 #tab_content {
     background: #2c3e50;
     padding: 1rem;
+}
+.content-block {
+    border-bottom: 1px solid #7f8c8d;
+    margin-bottom: 2.5rem;
+    overflow: auto;
+}
+.content-block:last-child {
+    border-bottom: none;
+}
+.content-block > .edit-panel {
+    float: right;
+}
+.content-block > .content-wrapper {
+    clear: both;
+}
+.content-block > .editor-wrapper {
+
+}
+.editor-wrapper > textarea {
+    background: #2c3e50;
 }

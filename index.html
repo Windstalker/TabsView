@@ -21,6 +21,7 @@
 	  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 	<link rel="stylesheet" href="css/normalize.css">
 	<link rel="stylesheet" href="css/skeleton.css">
+	<link rel="stylesheet" href="css/foundation-icons.css">
 	<link rel="stylesheet" href="css/tabs_view.css">
 
 	<!-- Favicon
@@ -58,8 +59,12 @@
 	<div id="tab_content" class="row rounded">
 		<div class="content-block" data-block-id="c0">
 			<div class="edit-panel row">
-				<button class="ico-edit edit-block">Edit</button>
-				<button class="ico-close delete-block">Delete</button>
+				<button class="edit-block fi-pencil">
+					<span>Edit</span>
+				</button>
+				<button class="delete-block fi-x">
+					<span>Delete</span>
+				</button>
 			</div>
 			<div class="content-wrapper row">
 				<img src="http://lorempixel.com/240/160/nature" alt="Picture"/>
@@ -70,8 +75,41 @@
 				</p>
 			</div>
 		</div>
+		<div class="content-block" data-block-id="c1">
+			<div class="edit-panel row">
+				<button class="edit-block fi-pencil">
+					<span>Edit</span>
+				</button>
+				<button class="delete-block fi-x">
+					<span>Delete</span>
+				</button>
+				<button class="edit-block fi-save">
+					<span>Save</span>
+				</button>
+				<button class="edit-block fi-asterisk">
+					<span>Clear</span>
+				</button>
+				<button class="edit-block fi-prohibited">
+					<span>Cancel</span>
+				</button>
+			</div>
+			<div class="content-wrapper row">
+				<img src="http://lorempixel.com/240/160/cats" alt="Picture"/>
+				<p>
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+					Accusantium animi asperiores aut doloribus facilis, id iusto, magnam modi nisi nobis,
+					non ullam ut. Cupiditate nihil perspiciatis repellat! Aliquam assumenda, recusandae.
+				</p>
+			</div>
+			<div class="editor-wrapper">
+				<label for="md_editor_c1">Write your content in Markdown format</label>
+				<textarea class="u-full-width" placeholder="Place your Markdown here" id="md_editor_c1"></textarea>
+			</div>
+		</div>
 		<div class="content-block row">
-			<button class="u-full-width ico-plus add-block">Add new content block</button>
+			<button class="u-full-width fi-plus add-block">
+				<span>Add new content block</span>
+			</button>
 		</div>
 	</div>
 </div>
