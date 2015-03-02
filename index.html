@@ -39,24 +39,31 @@
 <!-- Primary Page Layout
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 <div class="container" id="tabs_view">
-	<ul id="tabs_holder" class="row rounded">
-		<li class="tab active" id="tab_1" data-tab-id="c0">
-			<span class="tab-name">Tab #1</span>
-			<button class="close-tab"></button>
-		</li>
-		<li class="tab" id="tab_2" data-tab-id="c1">
-			<span class="tab-name">Tab #2</span>
-			<button class="close-tab"></button>
-		</li>
-		<li class="tab" id="tab_3" data-tab-id="c2">
-			<span class="tab-name">Tab #3</span>
-			<button class="close-tab"></button>
-		</li>
-		<li class="tab ico-plus add-new-tab">
-			<span class="tab-name">Add new tab</span>
-		</li>
-	</ul>
-	<div id="tab_content" class="row rounded">
+	<div id="tabs_holder" class="row">
+		<ul class="tabs-holder ten columns rounded">
+			<li class="tab active" id="tab_1" data-tab-id="c0">
+				<span class="tab-name">Tab #1</span>
+				<button class="close-tab"></button>
+			</li>
+			<li class="tab" id="tab_2" data-tab-id="c1">
+				<span class="tab-name">Tab #2</span>
+				<button class="close-tab"></button>
+			</li>
+			<li class="tab" id="tab_3" data-tab-id="c2">
+				<span class="tab-name">Tab #3</span>
+				<button class="close-tab"></button>
+			</li>
+			<li class="tab fi-plus add-new-tab">
+				<span class="tab-name">Add new tab</span>
+			</li>
+		</ul>
+		<div class="tab-nav-panel two columns rounded">
+			<button class="navigation fi-arrow-left" data-direction="left"></button>
+			<button class="navigation fi-arrow-right" data-direction="right"></button>
+		</div>
+	</div>
+
+	<div class="tab-content row rounded">
 		<div class="content-block" data-block-id="c0">
 			<div class="edit-panel row">
 				<button class="edit-block fi-pencil">
