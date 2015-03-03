@@ -1,0 +1,33 @@
+<div class="tab-content row rounded">
+	<div class="content-block">
+		<div class="edit-panel row">
+			<% if (tab.editMode) { %>
+			<button class="edit-block fi-save">
+				<span>Save</span>
+			</button>
+			<button class="edit-block fi-asterisk">
+				<span>Clear</span>
+			</button>
+			<button class="edit-block fi-prohibited">
+				<span>Cancel</span>
+			</button>
+			<% } else { %>
+			<button class="edit-block fi-pencil">
+				<span>Edit</span>
+			</button>
+			<button class="delete-block fi-x">
+				<span>Delete</span>
+			</button>
+			<% } %>
+		</div>
+		<div class="content-wrapper row">
+			<% converterMD.makeHTML(tab.content); %>
+		</div>
+		<% if (tab.editMode) { %>
+		<div class="editor-wrapper">
+			<label for="md_editor">Write your content in Markdown format</label>
+			<textarea class="u-full-width" placeholder="Place your Markdown here" id="md_editor"><%= tab.content %></textarea>
+		</div>
+		<% } %>
+	</div>
+</div>

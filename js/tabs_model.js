@@ -1,17 +1,27 @@
-var ContentModel = Backbone.Model.extend({
-	defaults: {
-		markdown: '',
-		filename: ''
-	},
-	idAttribute: 'filename'
-});
-var ContentCollection = Backbone.Collection.extend({
-	model: ContentModel
-});
 var TabModel = Backbone.Model.extend({
 	defaults: {
 		title: 'New Tab',
-		content: new ContentCollection()
+		content: '',
+		contentURL: '',
+		isActive: false,
+		editMode: true
+	},
+	url: function (relURL) {
+		return 'templates/md/' + relURL;
+	},
+	initialize: function () {
+		var url = this.get('contentURL');
+		if (url.length) {
+			this.addContentFromURL(url);
+		}
+		this.set('editMode', !this.get('content').length);
+	},
+	addContentFromURL: function (u) {
+		var url = this.url(u);
+		this.fetch({url: url, dataType: 'text'})
+	},
+	parse: function (response) {
+		return {content: response, editMode: !response.length}
 	}
 });
 var Tabs = Backbone.Collection.extend({
