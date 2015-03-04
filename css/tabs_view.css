@@ -1,10 +1,19 @@
 body {
     background: #22313F;
     color: #ecf0f1;
-    font-family: Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-family: Lato, Helvetica Neue, Helvetica, Arial, sans-serif;
 }
-ul {
-    list-style: none;
+code {
+    background: #22313F;
+}
+ul, ol {
+    padding-left: 2rem;
+}
+blockquote {
+    background: #22313F;
+    border-left: 0.3rem solid #2980b9;
+    overflow: hidden;
+    padding: 1rem;
 }
 button,
 button:focus {
@@ -78,6 +87,8 @@ button:hover {
     background: #2c3e50;
     white-space: nowrap;
     width: 100%;
+    list-style: none;
+    padding: 0;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -111,10 +122,10 @@ button:hover {
 .tab-content {
     background: #2c3e50;
     padding: 1rem;
+    margin-bottom: 2.5rem;
 }
 .content-block {
     border-bottom: 1px solid #7f8c8d;
-    margin-bottom: 2.5rem;
     overflow: auto;
 }
 .content-block:last-child {

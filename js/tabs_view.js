@@ -9,7 +9,10 @@ var TabsView = Backbone.View.extend({
 	loader: null,
 	converter: new Showdown.converter(),
 	events: {
-
+		'click .tab[data-tab-id]': 'onTabClick',
+		'click .tab[data-tab-id].active > .tab-name': 'onTabNameClick',
+		'click .tab[data-tab-id] > .close-tab': 'onTabCloseClick',
+		'click .tab.add-new-tab': 'onAddTabClick'
 	},
 	initialize: function () {
 		var templateXHR = $.get(this.url),
@@ -25,17 +28,17 @@ var TabsView = Backbone.View.extend({
 			var $subTemplates = $(templateHTML).find('[data-refresh]');
 			if ($subTemplates.length) {
 				self.subTemplates = _.map($subTemplates, function (wrap) {
-					return _.template(wrap.innerHTML);
+					return _.template(_.unescape(wrap.innerHTML));
 				});
 			}
 			self.template = _.template(templateHTML);
-			self.tabs.setActiveTab(0);
+			self.tabs.setActiveTabAtIndex(0);
 			self.bindModel();
 			self.render();
 		});
 	},
 	bindModel: function () {
-		this.listenTo(this.tabs, 'change', this.render);
+		this.listenTo(this.tabs, 'change:isActive change:title add remove', this.render);
 	},
 	unbindModel: function () {
 		this.stopListening(this.tabs);
@@ -59,11 +62,12 @@ var TabsView = Backbone.View.extend({
 				console.log(args);
 				self.$el.html(self.template.apply(self, args));
 				if (self.subTemplates) {
-					self.$inner = self.$el.find('[data-refresh]').splice(0, self.subTemplates.length);
+					self.$inner = self.$el.find('[data-refresh]');
+					console.log(self.$inner)
 				}
 			}
 		} catch (e) {
-			console.error('Rendering Error: \n' + e.toString())
+			throw e;
 		}
 
 		this.firstRender = false;
@@ -72,5 +76,29 @@ var TabsView = Backbone.View.extend({
 	},
 	appendIn: function (containerEl) {
 		$(containerEl).append(this.el);
+	},
+	onTabClick: function (e) {
+		var cid = this.$(e.currentTarget).attr('data-tab-id');
+		this.tabs.setActiveTab(cid);
+	},
+	onTabNameClick: function (e) {
+		e.stopPropagation();
+
+		var cid = this.$(e.currentTarget).parent('.tab').attr('data-tab-id');
+		var tab = this.tabs.get(cid);
+		var oldTitle = tab.get('title');
+		var newTitle = window.prompt('Enter the name of the tab', oldTitle);
+		if (newTitle && newTitle.length) {
+			tab.set('title', newTitle);
+		}
+	},
+	onTabCloseClick: function (e) {
+		e.stopPropagation();
+
+		var cid = this.$(e.currentTarget).parent('.tab').attr('data-tab-id');
+		this.tabs.closeTab(cid)
+	},
+	onAddTabClick: function () {
+		this.tabs.createTab();
 	}
 });

@@ -2,11 +2,12 @@
 	<ul class="tabs-holder ten columns rounded" data-refresh="true">
 		<% _(tabs).each(function (tab, i) { %>
 		<% var active = tab.isActive ? "active" : ""; %>
-		<li class="tab <%= active %>" id="tab_<%= i %>" data-tab-id="<%= i %>">
+		<% var cid = this.tabs.at(i).cid; %>
+		<li class="tab <%= active %>" data-tab-id="<%= cid %>">
 			<span class="tab-name"><%= tab.title %></span>
 			<button class="close-tab"></button>
 		</li>
-		<% }); %>
+		<% }, this); %>
 		<li class="tab fi-plus add-new-tab">
 			<span class="tab-name">Add new tab</span>
 		</li>

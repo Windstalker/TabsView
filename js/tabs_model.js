@@ -26,40 +26,77 @@ var Tabs = Backbone.Collection.extend({
 			contentURL: 'templates/md/tab_2.md'
 		}
 	],
-	activeTab: null,
 	initialize: function () {
-		this.on('all', function(e){console.log(e)});
+
 	},
 	loadDefaultTabs: function () {
-		var xhrs = _.map(this.defaultTabs, function (tab) {
+		var self = this,
+			defaultTabs = this.defaultTabs;
+
+		var xhrs = _.map(defaultTabs, function (tab) {
 			return $.get(tab.contentURL);
 		});
+
 		var promise = $.when.apply(this, xhrs);
-		var onDone = _.bind(this.resetToLoadedContent, this, xhrs);
+		var onDone = function () {
+			_.map(defaultTabs, function (tab, i) {
+				_.extend(tab, {content: xhrs[i].responseText})
+			});
+			self.resetToLoadedContent()
+		};
 
 		promise.then(onDone);
 
 		return promise;
 	},
-	resetToLoadedContent: function (xhrs) {
+	resetToLoadedContent: function () {
 		var defaultTabs = this.defaultTabs;
-		var collection = _.map(xhrs, function (xhr, i) {
-			return _.extend({content: xhr.responseText}, defaultTabs[i]);
-		});
-		this.reset(collection)
+		this.reset(defaultTabs);
 	},
-	setActiveTab: function (index) {
-		var nextActiveTab = this.at(index),
+	setActiveTabAtIndex: function (i) {
+		var cid = this.at(i).cid;
+		this.setActiveTab(cid);
+	},
+	setActiveTab: function (cid) {
+		var nextActiveTab = this.get(cid),
 			prevActiveTab = this.getActiveTab();
 
 		if (prevActiveTab) {
+			if (prevActiveTab.cid === cid) {
+				return prevActiveTab;
+			}
 			prevActiveTab.set({isActive: false}, {silent:true});
 		}
 		if (nextActiveTab) {
 			nextActiveTab && nextActiveTab.set({isActive: true});
 		}
+		return nextActiveTab;
 	},
 	getActiveTab: function () {
 		return this.findWhere({isActive: true});
+	},
+	createTab: function () {
+		this.add({});
+	},
+	closeTab: function (cid) {
+		var closestTab = this.getClosestTo(cid);
+		if (this.length > 1) {
+			this.setActiveTab(closestTab.cid);
+			this.remove(cid);
+		} else {
+			var defaults = _.extend(
+				{},
+				TabModel.prototype.defaults,
+				{isActive: true}
+			);
+			this.at(0)
+				.clear()
+				.set(defaults);
+		}
+	},
+	getClosestTo: function (cid) {
+		var tab = this.get(cid),
+			tabIndex = this.indexOf(tab);
+		return this.at(tabIndex - 1) || this.at(tabIndex + 1);
 	}
 });

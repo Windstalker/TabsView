@@ -1,6 +1,8 @@
 ## Blocks and elements
 
-> This is blockquote. Use it wisely!
+This is blockquote:
+> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab eos esse facilis, hic id illo in ipsam labore laborum
+> magni obcaecati quisquam ratione repellendus rerum saepe tempore temporibus vero voluptatum.
 
 ***
 
