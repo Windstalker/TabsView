@@ -1,0 +1,53 @@
+<div id="tabs_holder" class="row">
+	<ul class="tabs-holder ten columns rounded" data-refresh="true">
+		<% _(tabs).each(function (tab, i) { %>
+		<% var active = tab.isActive ? "active" : ""; %>
+		<li class="tab <%= active %>" id="tab_<%= i %>" data-tab-id="<%= i %>">
+			<span class="tab-name"><%= tab.title %></span>
+			<button class="close-tab"></button>
+		</li>
+		<% }); %>
+		<li class="tab fi-plus add-new-tab">
+			<span class="tab-name">Add new tab</span>
+		</li>
+	</ul>
+	<div class="tab-nav-panel two columns rounded">
+		<button class="navigation fi-arrow-left" data-direction="left"></button>
+		<button class="navigation fi-arrow-right" data-direction="right"></button>
+	</div>
+</div>
+<div class="tab-content row rounded">
+	<div class="content-block" data-refresh="true">
+		<% if (activeTab) { %>
+		<div class="edit-panel row">
+			<% if (activeTab.editMode) { %>
+			<button class="edit-block fi-save">
+				<span>Save</span>
+			</button>
+			<button class="edit-block fi-asterisk">
+				<span>Clear</span>
+			</button>
+			<button class="edit-block fi-prohibited">
+				<span>Cancel</span>
+			</button>
+			<% } else { %>
+			<button class="edit-block fi-pencil">
+				<span>Edit</span>
+			</button>
+			<button class="delete-block fi-x">
+				<span>Delete</span>
+			</button>
+			<% } %>
+		</div>
+		<div class="content-wrapper row">
+			<%= this.converter.makeHtml(activeTab.content) %>
+		</div>
+		<% if (activeTab.editMode) { %>
+		<div class="editor-wrapper">
+			<label for="md_editor">Write your content in Markdown format</label>
+			<textarea class="u-full-width" placeholder="Place your Markdown here" id="md_editor"><%= activeTab.content %></textarea>
+		</div>
+		<% } %>
+		<% } %>
+	</div>
+</div>
