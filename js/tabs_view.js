@@ -12,7 +12,8 @@ var TabsView = Backbone.View.extend({
 		'click .tab[data-tab-id]': 'onTabClick',
 		'click .tab[data-tab-id].active > .tab-name': 'onTabNameClick',
 		'click .tab[data-tab-id] > .close-tab': 'onTabCloseClick',
-		'click .tab.add-new-tab': 'onAddTabClick'
+		'click .tab.add-new-tab': 'onAddTabClick',
+		'mousedown button.navigation': 'onScrollNavBtnPress'
 	},
 	initialize: function () {
 		var templateXHR = $.get(this.url),
@@ -69,7 +70,8 @@ var TabsView = Backbone.View.extend({
 		} catch (e) {
 			throw e;
 		}
-
+		this.tabHolder = this.el.querySelector('.tabs-holder');
+		this.tabContent = this.el.querySelector('.tab-content');
 		this.firstRender = false;
 
 		return this;
@@ -100,5 +102,17 @@ var TabsView = Backbone.View.extend({
 	},
 	onAddTabClick: function () {
 		this.tabs.createTab();
+	},
+	onScrollNavBtnPress: function (e) {
+		var increments = {
+				left: -50,
+				right: +50
+			},
+			dir = this.$(e.currentTarget).attr('data-direction');
+		this.tabHolder.scrollLeft += increments[dir];
+
+	},
+	onScrollNavToggle: function (e) {
+		this.tabHolderScroll = e.type == 'mousedown';
 	}
 });

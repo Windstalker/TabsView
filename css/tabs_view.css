@@ -48,6 +48,9 @@ button:hover {
     border-bottom-color: #27ae60;
     background: #34495e;
 }
+.tab.add-new-tab:hover {
+    color: #1abc9c;
+}
 .tab > * {
     margin-bottom: 0;
     display: inline-block;

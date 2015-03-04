@@ -79,9 +79,11 @@ var Tabs = Backbone.Collection.extend({
 		this.add({});
 	},
 	closeTab: function (cid) {
-		var closestTab = this.getClosestTo(cid);
 		if (this.length > 1) {
-			this.setActiveTab(closestTab.cid);
+			if (this.get(cid).get('isActive')) {
+				var closestTab = this.getClosestTo(cid);
+				this.setActiveTab(closestTab.cid);
+			}
 			this.remove(cid);
 		} else {
 			var defaults = _.extend(
