@@ -19,8 +19,6 @@ var TabsView = Backbone.View.extend({
 		'click .edit-panel > .clear-block': 'onClearClick',
 		'click .edit-panel > .cancel-edit-block': 'onCancelClick',
 		'click .edit-panel > .edit-block': 'onEditClick'
-//		Todo: for further implementation of many content blocks
-//		'click .edit-panel > .delete-block': 'onDeleteBlock'
 	},
 	initialize: function () {
 		var templateXHR = $.get(this.url),
@@ -31,14 +29,15 @@ var TabsView = Backbone.View.extend({
 			templateXHR
 		);
 		this.loader.then(function () {
-			console.log('loader done');
 			var templateHTML = templateXHR.responseText;
 			var $subTemplates = $(templateHTML).find('[data-refresh]');
+
 			if ($subTemplates.length) {
 				self.subTemplates = _.map($subTemplates, function (wrap) {
 					return _.template(_.unescape(wrap.innerHTML));
 				});
 			}
+
 			self.template = _.template(templateHTML);
 			self.tabs.setActiveTabAtIndex(0);
 			self.bindModel();
@@ -67,11 +66,9 @@ var TabsView = Backbone.View.extend({
 					wrap.innerHTML = subTemplates[i].apply(self, args);
 				});
 			} else {
-				console.log(args);
 				self.$el.html(self.template.apply(self, args));
 				if (self.subTemplates) {
 					self.$inner = self.$el.find('[data-refresh]');
-					console.log(self.$inner)
 				}
 			}
 		} catch (e) {
