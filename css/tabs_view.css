@@ -157,6 +157,7 @@ button:active {
 
 }
 .editor-wrapper > textarea {
+    font-family: monospace;
     background: #2c3e50;
     height: auto;
 }
