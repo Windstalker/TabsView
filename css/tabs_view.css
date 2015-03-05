@@ -20,9 +20,16 @@ button:focus {
     color: inherit;
     border-color: inherit;
 }
-button:hover {
+button:hover,
+button:active {
     color: #1abc9c;
     border-color: #1abc9c;
+}
+.u-pos-rel {
+    position: relative;
+}
+.u-pos-abs {
+    position: absolute;
 }
 .container {
     margin-top: 4rem;
@@ -100,6 +107,8 @@ button:hover {
     background: #2c3e50;
     line-height: 5.3rem;
     height: 5.3rem;
+    overflow: hidden;
+    margin-bottom: 2.5rem;
 }
 .tab-nav-panel > button.navigation {
     display: block;
@@ -114,6 +123,10 @@ button:hover {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+}
+.tab-nav-panel > button.navigation:active {
+    /*color: #3498db;*/
+    background: #34495e;
 }
 .tab-nav-panel > button.navigation:last-child {
     border-right: 0;

@@ -122,8 +122,29 @@ var TabsView = Backbone.View.extend({
 				right: +50
 			},
 			dir = this.$(e.currentTarget).attr('data-direction');
-		this.tabHolder.scrollLeft += increments[dir];
 
+		$('body').one('mouseup', _.bind(this.onScrollNavToggle, this));
+
+		this.onScrollNavToggle(e);
+		this.scrollingAnimation(increments[dir]);
+	},
+	scrollingAnimation: function (deltaPx) {
+		var self = this;
+		var lastFrameTime = null;
+		var loopFn = function (t) {
+			if (lastFrameTime == null) {
+				lastFrameTime = t;
+			}
+			var deltaTime = t - lastFrameTime;
+
+			self.tabHolder.scrollLeft += deltaPx * deltaTime/1000;
+			if (!self.tabHolderScroll) {
+				window.cancelAnimationFrame(loopId);
+				return ;
+			}
+			loopId = window.requestAnimationFrame(loopFn);
+		};
+		var loopId = window.requestAnimationFrame(loopFn);
 	},
 	onScrollNavToggle: function (e) {
 		this.tabHolderScroll = e.type == 'mousedown';
