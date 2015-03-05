@@ -100,5 +100,11 @@ var Tabs = Backbone.Collection.extend({
 		var tab = this.get(cid),
 			tabIndex = this.indexOf(tab);
 		return this.at(tabIndex - 1) || this.at(tabIndex + 1);
+	},
+	toggleEditMode: function (flag) {
+		this.getActiveTab().set('editMode', !!flag);
+	},
+	saveContent: function (mdStr) {
+		this.getActiveTab().set('content', mdStr);
 	}
 });

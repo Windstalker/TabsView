@@ -145,4 +145,5 @@ button:hover {
 }
 .editor-wrapper > textarea {
     background: #2c3e50;
+    height: auto;
 }

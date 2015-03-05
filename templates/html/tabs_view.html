@@ -22,31 +22,34 @@
 		<% if (activeTab) { %>
 		<div class="edit-panel row">
 			<% if (activeTab.editMode) { %>
-			<button class="edit-block fi-save">
+			<button class="save-block fi-save">
 				<span>Save</span>
 			</button>
-			<button class="edit-block fi-asterisk">
+			<button class="clear-block fi-asterisk">
 				<span>Clear</span>
 			</button>
-			<button class="edit-block fi-prohibited">
+			<button class="cancel-edit-block fi-prohibited">
 				<span>Cancel</span>
 			</button>
 			<% } else { %>
 			<button class="edit-block fi-pencil">
 				<span>Edit</span>
 			</button>
+			<!--
 			<button class="delete-block fi-x">
 				<span>Delete</span>
 			</button>
+			<-->
 			<% } %>
 		</div>
+		<% if (!activeTab.editMode) { %>
 		<div class="content-wrapper row">
 			<%= this.converter.makeHtml(activeTab.content) %>
 		</div>
-		<% if (activeTab.editMode) { %>
+		<% } else { %>
 		<div class="editor-wrapper">
 			<label for="md_editor">Write your content in Markdown format</label>
-			<textarea class="u-full-width" placeholder="Place your Markdown here" id="md_editor"><%= activeTab.content %></textarea>
+			<textarea class="u-full-width" rows="15" placeholder="Place your Markdown here" id="md_editor"><%= activeTab.content %></textarea>
 		</div>
 		<% } %>
 		<% } %>

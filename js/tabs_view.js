@@ -13,7 +13,14 @@ var TabsView = Backbone.View.extend({
 		'click .tab[data-tab-id].active > .tab-name': 'onTabNameClick',
 		'click .tab[data-tab-id] > .close-tab': 'onTabCloseClick',
 		'click .tab.add-new-tab': 'onAddTabClick',
-		'mousedown button.navigation': 'onScrollNavBtnPress'
+		'mousedown button.navigation': 'onScrollNavBtnPress',
+
+		'click .edit-panel > .save-block': 'onSaveClick',
+		'click .edit-panel > .clear-block': 'onClearClick',
+		'click .edit-panel > .cancel-edit-block': 'onCancelClick',
+		'click .edit-panel > .edit-block': 'onEditClick'
+//		Todo: for further implementation of many content blocks
+//		'click .edit-panel > .delete-block': 'onDeleteBlock'
 	},
 	initialize: function () {
 		var templateXHR = $.get(this.url),
@@ -39,7 +46,7 @@ var TabsView = Backbone.View.extend({
 		});
 	},
 	bindModel: function () {
-		this.listenTo(this.tabs, 'change:isActive change:title add remove', this.render);
+		this.listenTo(this.tabs, 'change add remove reset', this.render);
 	},
 	unbindModel: function () {
 		this.stopListening(this.tabs);
@@ -70,11 +77,17 @@ var TabsView = Backbone.View.extend({
 		} catch (e) {
 			throw e;
 		}
-		this.tabHolder = this.el.querySelector('.tabs-holder');
-		this.tabContent = this.el.querySelector('.tab-content');
+
+		this.onEndRender();
+
 		this.firstRender = false;
 
 		return this;
+	},
+	onEndRender: function () {
+		this.tabHolder = this.el.querySelector('.tabs-holder');
+		this.tabContent = this.el.querySelector('.tab-content');
+		this.mdEditor = this.el.querySelector('#md_editor')
 	},
 	appendIn: function (containerEl) {
 		$(containerEl).append(this.el);
@@ -114,5 +127,19 @@ var TabsView = Backbone.View.extend({
 	},
 	onScrollNavToggle: function (e) {
 		this.tabHolderScroll = e.type == 'mousedown';
+	},
+	onEditClick: function () {
+		this.tabs.toggleEditMode(true);
+	},
+	onSaveClick: function () {
+		var newContent = this.mdEditor.value;
+		this.tabs.saveContent(newContent);
+		this.tabs.toggleEditMode(false);
+	},
+	onClearClick: function () {
+		this.mdEditor.value = "";
+	},
+	onCancelClick: function () {
+		this.tabs.toggleEditMode(false);
 	}
 });
